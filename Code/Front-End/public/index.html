@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+
+  <!--Select Plugins-->
+  <link href="assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
+  <!--inputtags-->
+  <link href="assets/plugins/inputtags/css/bootstrap-tagsinput.css" rel="stylesheet" />
+  <!--multi select-->
+  <link href="assets/plugins/jquery-multi-select/multi-select.css" rel="stylesheet" type="text/css">
+  <!--Bootstrap Datepicker-->
+  <link href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+  <!--Touchspin-->
+  <link href="assets/plugins/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css" rel="stylesheet" type="text/css">
+
+  <!-- simplebar CSS-->
+  <link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+  <!-- Bootstrap core CSS-->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- animate CSS-->
+  <link href="assets/css/animate.css" rel="stylesheet" type="text/css" />
+  <!-- Icons CSS-->
+  <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+  <!-- Sidebar CSS-->
+  <link href="assets/css/sidebar-menu.css" rel="stylesheet" />
+  <!-- Custom Style-->
+  <link href="assets/css/app-style.css" rel="stylesheet" />
+  <link href="assets/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet">
+  <title>React App</title>
+</head>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  aside {
+    width: auto;
+    height: 800px;
+    display: inline-block;
+    font-size: 15px;
+    vertical-align: top;
+  }
+
+  aside button {
+    background: space;
+    border: none
+  }
+
+  main {
+    width: auto;
+    height: 800px;
+    display: inline-block;
+    font-size: 15px;
+    vertical-align: top;
+  }
+
+  aside header {
+    padding: 30px 20px;
+  }
+
+  .scrollbar {
+    margin-left: 30px;
+    float: left;
+    height: 300px;
+    width: 65px;
+    background: #F5F5F5;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+  }
+
+  .force-overflow {
+    min-height: 450px;
+  }
+
+  #style-2::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+  }
+
+  aside input {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 50px 0 20px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png);
+    background-repeat: no-repeat;
+    background-position: 170px;
+    background-size: 40px;
+  }
+
+  aside input::placeholder {
+    color: #fff;
+  }
+
+  aside ul {
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: scroll;
+    height: 690px;
+
+  }
+
+  #aside ul::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+  }
+
+  aside li {
+    padding: 10px 0;
+  }
+
+  aside li:hover {
+    width: 200px;
+  }
+
+  h2,
+  h3 {
+    margin: 0;
+  }
+
+  aside li img {
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-right: 8px;
+  }
+
+  aside li div {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 12px;
+  }
+
+  aside li h2 {
+    font-size: 14px;
+    color: #fff;
+    font-weight: normal;
+    margin-bottom: 5px;
+  }
+
+  aside li h3 {
+    font-size: 12px;
+    color: #7e818a;
+    font-weight: normal;
+  }
+
+  .status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 7px;
+  }
+
+  .green {
+    background-color: #58b666;
+  }
+
+  .orange {
+    background-color: #ff725d;
+  }
+
+  .blue {
+    background-color: #6fbced;
+    margin-right: 0;
+    margin-left: 7px;
+  }
+
+  main header {
+    height: 110px;
+    padding: 30px 20px 30px 40px;
+  }
+
+  main header>* {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  main header img:first-child {
+    border-radius: 50%;
+  }
+
+  main header img:last-child {
+    width: 24px;
+    margin-top: 8px;
+  }
+
+  main header div {
+    margin-left: 10px;
+    margin-right: 145px;
+  }
+
+  main header h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  main header h3 {
+    font-size: 14px;
+    font-weight: normal;
+    color: #7e818a;
+  }
+
+  #chat {
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none;
+    overflow-y: scroll;
+    height: 535px;
+  }
+
+  #chat li {
+    padding: 10px 30px;
+  }
+
+  #chat h2,
+  #chat h3 {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: normal;
+  }
+
+  #chat h3 {
+    color: #bbb;
+  }
+
+  #chat .entete {
+    margin-bottom: 5px;
+  }
+
+  #chat .message {
+    padding: 20px;
+    color: #fff;
+    line-height: 25px;
+    max-width: 90%;
+    display: inline-block;
+    text-align: left;
+    border-radius: 5px;
+  }
+
+  #chat .me {
+    text-align: right;
+  }
+
+  #chat .you .message {
+    background-color: #58b666;
+  }
+
+  #chat .me .message {
+    background-color: #6fbced;
+  }
+
+
+
+  main footer {
+    height: 155px;
+    padding: 20px 30px 10px 20px;
+  }
+
+  main footer textarea {
+    resize: none;
+    border: none;
+    display: block;
+    width: 100%;
+    height: 80px;
+    border-radius: 3px;
+    padding: 20px;
+    font-size: 13px;
+    margin-bottom: 13px;
+  }
+
+  main footer textarea::placeholder {
+    color: #ddd;
+  }
+
+  main footer img {
+    height: 30px;
+    cursor: pointer;
+  }
+
+  main footer a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #6fbced;
+    vertical-align: top;
+    margin-left: 333px;
+    margin-top: 5px;
+    display: inline-block;
+  }
+</style>
+
+<body class="bg-theme bg-theme2">
+  <div id="wrapper">
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+      
+    -->
+    <div class="clearfix"></div>
+  </div>
+</body>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- simplebar js -->
+<script src="assets/plugins/simplebar/js/simplebar.js"></script>
+<!-- sidebar-menu js -->
+<script src="assets/js/sidebar-menu.js"></script>
+
+<!-- Custom scripts -->
+<script src="assets/js/app-script.js"></script>
+
+<!--Bootstrap Touchspin Js-->
+<script src="assets/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.js"></script>
+<script src="assets/plugins/bootstrap-touchspin/js/bootstrap-touchspin-script.js"></script>
+
+<!--Select Plugins Js-->
+<script src="assets/plugins/select2/js/select2.min.js"></script>
+<!--Inputtags Js-->
+<script src="assets/plugins/inputtags/js/bootstrap-tagsinput.js"></script>
+
+<!--Bootstrap Datepicker Js-->
+<script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script>
+  $('#default-datepicker').datepicker({
+    todayHighlight: true
+  });
+  $('#autoclose-datepicker').datepicker({
+    autoclose: true,
+    todayHighlight: true
+  });
+
+  $('#inline-datepicker').datepicker({
+    todayHighlight: true
+  });
+
+  $('#dateragne-picker .input-daterange').datepicker({});
+</script>
+
+<!--Multi Select Js-->
+<script src="assets/plugins/jquery-multi-select/jquery.multi-select.js"></script>
+<script src="assets/plugins/jquery-multi-select/jquery.quicksearch.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('.single-select').select2();
+
+    $('.multiple-select').select2();
+
+    //multiselect start
+
+    $('#my_multi_select1').multiSelect({
+      selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+      selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+      afterInit: function (ms) {
+        var that = this,
+          $selectableSearch = that.$selectableUl.prev(),
+          $selectionSearch = that.$selectionUl.prev(),
+          selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+          selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+        that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+          .on('keydown', function (e) {
+            if (e.which === 40) {
+              that.$selectableUl.focus();
+              return false;
+            }
+          });
+
+        that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+          .on('keydown', function (e) {
+            if (e.which == 40) {
+              that.$selectionUl.focus();
+              return false;
+            }
+          });
+      },
+      afterSelect: function () {
+        this.qs1.cache();
+        this.qs2.cache();
+      },
+      afterDeselect: function () {
+        this.qs1.cache();
+        this.qs2.cache();
+      }
+    });
+    $('#my_multi_select2').multiSelect({
+      selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+      selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+      afterInit: function (ms) {
+        var that = this,
+          $selectableSearch = that.$selectableUl.prev(),
+          $selectionSearch = that.$selectionUl.prev(),
+          selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+          selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+        that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+          .on('keydown', function (e) {
+            if (e.which === 40) {
+              that.$selectableUl.focus();
+              return false;
+            }
+          });
+
+        that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+          .on('keydown', function (e) {
+            if (e.which == 40) {
+              that.$selectionUl.focus();
+              return false;
+            }
+          });
+      },
+      afterSelect: function () {
+        this.qs1.cache();
+        this.qs2.cache();
+      },
+      afterDeselect: function () {
+        this.qs1.cache();
+        this.qs2.cache();
+      }
+    });
+
+    $('#my_multi_select3').multiSelect({
+      selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+      selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+      afterInit: function (ms) {
+        var that = this,
+          $selectableSearch = that.$selectableUl.prev(),
+          $selectionSearch = that.$selectionUl.prev(),
+          selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+          selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+        that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+          .on('keydown', function (e) {
+            if (e.which === 40) {
+              that.$selectableUl.focus();
+              return false;
+            }
+          });
+
+        that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+          .on('keydown', function (e) {
+            if (e.which == 40) {
+              that.$selectionUl.focus();
+              return false;
+            }
+          });
+      },
+      afterSelect: function () {
+        this.qs1.cache();
+        this.qs2.cache();
+      },
+      afterDeselect: function () {
+        this.qs1.cache();
+        this.qs2.cache();
+      }
+    });
+
+    $('.custom-header').multiSelect({
+      selectableHeader: "<div class='custom-header'>Selectable items</div>",
+      selectionHeader: "<div class='custom-header'>Selection items</div>",
+      selectableFooter: "<div class='custom-header'>Selectable footer</div>",
+      selectionFooter: "<div class='custom-header'>Selection footer</div>"
+    });
+
+
+  });
+</script>
+
+<script>
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
+</script>
+<!-- Metismenu js -->
+<script src="assets/plugins/metismenu/js/metisMenu.min.js"></script>
+
+<!-- Custom scripts -->
+<script src="assets/js/app-script.js"></script>
+<!-- Apex Chart JS -->
+<script src="assets/plugins/apexcharts/apexcharts.js"></script>
+<script src="assets/plugins/apexcharts/apex-custom-script.js"></script>
+</html>
