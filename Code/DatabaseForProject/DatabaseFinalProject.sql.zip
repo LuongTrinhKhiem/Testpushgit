@@ -750,8 +750,8 @@ ALTER TABLE `salary`
 -- Các ràng buộc cho bảng `schedule`
 --
 ALTER TABLE `schedule`
-  ADD CONSTRAINT `id_accounts` FOREIGN KEY (`id_account`) REFERENCES `account` (`id_account`),
-  ADD CONSTRAINT `id_subject` FOREIGN KEY (`id_subject`) REFERENCES `subject` (`id_subject`);
+  ADD CONSTRAINT `id_accounts` FOREIGN KEY (`id_account`) REFERENCES `account` (`id_account`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `id_subject` FOREIGN KEY (`id_subject`) REFERENCES `subject` (`id_subject`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Các ràng buộc cho bảng `student_late`
