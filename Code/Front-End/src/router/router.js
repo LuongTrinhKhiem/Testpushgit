@@ -26,7 +26,7 @@ class router extends Component {
           <>
             <Route path="/bend" component={bend} />
             {/* <Route path="/department" component={department} /> */}
-            <Route path="/position" component={position} />
+            {/* <Route path="/position" component={position} /> */}
             <Route path="/salary" component={salary} />
             <Route path="/shift" component={shift} />
             <Route path="/attendance" component={attendance} />

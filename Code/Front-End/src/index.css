@@ -16,3 +16,19 @@ code {
   border: none;
   background-color: transparent;
 }
+.sidebar-menu > li:hover > a,
+.sidebar-menu > li > a.active {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  border-left-color: #ffffff;
+}
+
+.sidebar-menu > li:hover > a,
+.sidebar-menu > li.active > a:not(.active) {
+  color: unset;
+  background: unset;
+  border: none;
+}
+.modal-content {
+  background-color: black !important;
+}

@@ -51,7 +51,7 @@ class login extends Component {
         if (dataUser[0].role == 1) {
           window.location.href = '/bend'
         } else if (dataUser[0].role == 2) {
-          window.location.href = '/producer'
+          window.location.href = '/department'
         } else if (dataUser[0].role == 3) {
           window.location.href = '/attendance'
         }

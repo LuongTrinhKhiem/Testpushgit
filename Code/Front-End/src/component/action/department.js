@@ -10,10 +10,11 @@ class department extends Component {
       id_department: '',
       name: '',
       class: {},
+      teacher: [],
     }
   }
 
-  componentDidMount() {
+  getData() {
     const dataUser = JSON.parse(localStorage.getItem('userInfo'))
 
     Axios.get(`/api/department/viewById/${dataUser[0]?.id_department}`)
@@ -23,18 +24,27 @@ class department extends Component {
           this.setState({
             department: department.department,
             class: department.class?.[0],
+            teacher: department.teacher,
           })
         }
       })
       .catch((error) => console.log(error))
   }
 
+  componentDidMount() {
+    this.getData()
+  }
+
   handleInputChange = (event) => {
     const target = event.target
     const value = target.value
     const name = target.name
+    const old = this.state.detailEdit || {}
     this.setState({
-      [name]: value,
+      detailEdit: {
+        ...old,
+        [name]: value,
+      },
     })
     //console.log(this.state.name);
   }
@@ -69,28 +79,9 @@ class department extends Component {
   handleEditDepartment = (event) => {
     event.preventDefault()
 
-    const newEditDepartment = {
-      id_department: this.state.id_department,
-      name: this.state.name,
-    }
-    console.log(newEditDepartment)
-
-    Axios.post('/api/department/edit', newEditDepartment)
+    Axios.post('/api/user/edit', this.state.detailEdit)
       .then((res) => {
-        console.log(res)
-
-        let key = this.state.id_department
-        this.setState((prevState) => ({
-          department: prevState.department.map((elm) =>
-            elm.id_department === key
-              ? {
-                  ...elm,
-                  department_name: this.state.name,
-                }
-              : elm
-          ),
-        }))
-        //console.log(this.state.name);
+        this.getData()
       })
       .catch((error) => console.log(error))
   }
@@ -115,11 +106,6 @@ class department extends Component {
       .catch((error) => console.log(error))
   }
   render() {
-    console.log(
-      '🚀 ~ file: department.js:108 ~ department ~ this.setState ~ department:',
-      this.state.department
-    )
-
     return (
       <div>
         <div className="content-wrapper">
@@ -201,6 +187,7 @@ class department extends Component {
                             <th scope="col">Số điện thoại bố</th>
                             <th scope="col">Tên mẹ</th>
                             <th scope="col">Số điện thoại mẹ</th>
+                            <th scope="col">Hành động</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -214,7 +201,23 @@ class department extends Component {
                               <th>{item.mother_phone}</th>
                               <th>{item.father_name}</th>
                               <th>{item.father_phone}</th>
-                              {/* onClick={() => this.deleteDepartment(item)} */}
+                              <th>
+                                <button
+                                  type="button"
+                                  className="btn btn-light waves-effect waves-light m-1"
+                                  data-toggle="modal"
+                                  data-target="#formemodaledit"
+                                  onClick={() =>
+                                    this.setState({
+                                      detailEdit: {
+                                        ...item,
+                                      },
+                                    })
+                                  }
+                                >
+                                  <i className="fa fa-pencil" />
+                                </button>
+                              </th>
                             </tr>
                           ))}
                         </tbody>
@@ -242,16 +245,103 @@ class department extends Component {
                               <div className="col-12 col-lg-12 col-xl-12">
                                 <div className="form-group row">
                                   <label className="col-sm-12 col-form-label">
-                                    Edit Name of Department
+                                    Tên
                                   </label>
                                   <div className="col-sm-10">
                                     <input
                                       type="text"
                                       name="name"
                                       className="form-control"
-                                      placeholder={this.state.name}
                                       onChange={this.handleInputChange}
-                                      value={this.state.name}
+                                      value={this.state.detailEdit?.name}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="form-group row">
+                                  <label className="col-sm-12 col-form-label">
+                                    Địa chỉ
+                                  </label>
+                                  <div className="col-sm-10">
+                                    <input
+                                      type="text"
+                                      name="address"
+                                      className="form-control"
+                                      onChange={this.handleInputChange}
+                                      value={this.state.detailEdit?.address}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="form-group row">
+                                  <label className="col-sm-12 col-form-label">
+                                    Điện thoại
+                                  </label>
+                                  <div className="col-sm-10">
+                                    <input
+                                      type="number"
+                                      name="phone"
+                                      className="form-control"
+                                      onChange={this.handleInputChange}
+                                      value={this.state.detailEdit?.phone}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="form-group row">
+                                  <label className="col-sm-12 col-form-label">
+                                    Tên bố
+                                  </label>
+                                  <div className="col-sm-10">
+                                    <input
+                                      type="text"
+                                      name="father_name"
+                                      className="form-control"
+                                      onChange={this.handleInputChange}
+                                      value={this.state.detailEdit?.father_name}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="form-group row">
+                                  <label className="col-sm-12 col-form-label">
+                                    Số điện thoại bố
+                                  </label>
+                                  <div className="col-sm-10">
+                                    <input
+                                      type="number"
+                                      name="father_phone"
+                                      className="form-control"
+                                      onChange={this.handleInputChange}
+                                      value={
+                                        this.state.detailEdit?.father_phone
+                                      }
+                                    />
+                                  </div>
+                                </div>
+                                <div className="form-group row">
+                                  <label className="col-sm-12 col-form-label">
+                                    Tên mẹ
+                                  </label>
+                                  <div className="col-sm-10">
+                                    <input
+                                      type="text"
+                                      name="mother_name"
+                                      className="form-control"
+                                      onChange={this.handleInputChange}
+                                      value={this.state.detailEdit?.mother_name}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="form-group row">
+                                  <label className="col-sm-12 col-form-label">
+                                    Số điện thoại mẹ
+                                  </label>
+                                  <div className="col-sm-10">
+                                    <input
+                                      type="number"
+                                      name="mother_phone"
+                                      className="form-control"
+                                      onChange={this.handleInputChange}
+                                      value={
+                                        this.state.detailEdit?.mother_phone
+                                      }
                                     />
                                   </div>
                                 </div>
@@ -262,9 +352,11 @@ class department extends Component {
                               type="submit"
                               className="btn btn-light px-5"
                               onClick={this.handleEditDepartment}
+                              data-toggle="modal"
+                              data-target="#formemodaledit"
                             >
                               <i className="icon-lock" />
-                              Edit
+                              Sửa
                             </button>
                           </form>
                         </div>
@@ -272,6 +364,40 @@ class department extends Component {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="col-lg-12">
+                <div className="card">
+                  <div className="card-body">
+                    <h5 className="card-title">Danh sách giáo viên</h5>
+                    <h5 className="card-title">
+                      Lớp {this.state.class.department_name}
+                    </h5>
+                    <div className="table-responsive">
+                      <table className="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Tên giáo viên</th>
+                            <th scope="col">Địa chỉ</th>
+                            <th scope="col">Điện thoại</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {this.state.teacher.map((item, key) => (
+                            <tr key={key}>
+                              <th>{key + 1}</th>
+                              <th>{item.name}</th>
+                              <th>{item.address}</th>
+                              <th>{item.phone}</th>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                {/* Modal */}
               </div>
             </div>
           </div>

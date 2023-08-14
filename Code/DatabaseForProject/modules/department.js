@@ -18,14 +18,18 @@ module.exports = (app) => {
   });
 
   app.get("/api/department/viewById/(:id)", (req, res) => {
-    var sql = `SELECT * FROM account WHERE id_department = ${req.params.id} AND id_role = 3`;
-    connection.query(sql, function (err, results) {
+    var sql1 = `SELECT * FROM account WHERE id_department = ${req.params.id} AND id_role = 3`;
+    connection.query(sql1, function (err, results) {
       if (err) throw err;
 
-      var sql = `SELECT * FROM department WHERE id_department = ${req.params.id}`;
-      connection.query(sql, function (err, results2) {
+      var sql2 = `SELECT * FROM department WHERE id_department = ${req.params.id}`;
+      connection.query(sql2, function (err, results2) {
         if (err) throw err;
-        res.json({ department: results, class: results2 });
+        var sql3 = `SELECT * FROM account WHERE id_department = ${req.params.id} AND id_role = 2`;
+        connection.query(sql3, function (err, results3) {
+          if (err) throw err;
+          res.json({ department: results, class: results2, teacher: results3 });
+        });
       });
     });
   });

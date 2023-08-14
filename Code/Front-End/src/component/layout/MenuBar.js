@@ -27,18 +27,19 @@ class MenuBar extends Component {
                     <span>Danh sách tài khoản</span>
                   </NavLink>
                 </li>
+
                 {/* <li>
                   <NavLink to="/department">
                     <i className="zmdi zmdi-invert-colors" />{' '}
                     <span>Danh sách lớp</span>
                   </NavLink>
                 </li> */}
-                <li>
+                {/* <li>
                   <NavLink to="/position">
                     <i className="zmdi zmdi-format-list-bulleted" />{' '}
                     <span>Thời khóa biểu</span>
                   </NavLink>
-                </li>
+                </li> */}
                 {/* <li>
                                         <NavLink to="/salary">
                                             <i className="zmdi zmdi-grid" /> <span>Salary</span>
@@ -54,11 +55,7 @@ class MenuBar extends Component {
                                             <i className="zmdi zmdi-face" /> <span>Danh sách điểm danh</span>
                                         </NavLink> 
                                     </li>  */}
-                <li>
-                  <NavLink to="/chatprocess">
-                    <i className="zmdi zmdi-lock" /> <span>Tin nhắn</span>
-                  </NavLink>
-                </li>
+
                 {/* <li>
                                         <NavLink to="/mission">
                                             <i className="zmdi zmdi-account-circle" />Missions<span></span>
@@ -69,14 +66,19 @@ class MenuBar extends Component {
                     <i className="zmdi zmdi-lock" /> <span>Tin tức</span>
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to="/chatprocess">
+                    <i className="zmdi zmdi-lock" /> <span>Tin nhắn</span>
+                  </NavLink>
+                </li>
               </>
             ) : dataUser[0].role == 2 ? (
               <>
-                <li>
+                {/* <li>
                   <NavLink to="/attendance">
                     <i className="zmdi zmdi-face" /> <span>Thời khóa biểu</span>
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
                   <NavLink to="/department">
                     <i className="zmdi zmdi-invert-colors" />
